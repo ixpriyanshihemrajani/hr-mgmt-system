@@ -55,9 +55,12 @@ const Login = (props: Props) => {
     
 
     const users: Users[] = [
-    { userId:1,email:'priyanshi.hemrajani@innovatechs.com',password:'manage'},
-    { userId:2,email:'naman.pokharna@innovatechs.com',password:'manage123'},
-     
+    { userId:1,email:'victoria.santiago@articulate.com',password:'manage'},
+    { userId:2,email:'marcus.rodriguez@articulate.com',password:'manage'},
+    { userId:3,email:'olivia.kim@articulate.com',password:'manage'},
+    { userId:4,email:'naman.pokharna@articulate.com',password:'manage'},
+    { userId:5,email:'anshul.singh@articulate.com',password:'manage'},
+    { userId:6,email:'priyanshi.hemrajani@articulate.com',password:'manage'},
     ];
 
     useEffect(()=>{

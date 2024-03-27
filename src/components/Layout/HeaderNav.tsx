@@ -56,6 +56,22 @@ const HeaderNav: React.FC<HeaderNavProps> = ({ children }) => {
     dispatch(logout());
   };
 
+  const loggedInUser = JSON.parse(localStorage.getItem('loggedInUser')|| "[]");
+  console.log('LoggedInUser:', loggedInUser);
+  
+  // Retrieve user data from localStorage
+  const data = JSON.parse(localStorage.getItem("data") || "[]");
+  
+  // Filter the data based on the emailId of the loggedInUser
+  const employeeData = data.filter((user: { emailId: any; }) => user.emailId === loggedInUser);
+  console.log(employeeData, "hello world");
+  
+  if (employeeData.length > 0) {
+      console.log('Employee ID:', employeeData[0]?.employeeId); // Access employeeId only if employeeData[0] is defined
+  } else {
+      console.log('No user data found for the logged-in user');
+  }
+
   return (
     <Layout>
       <Header
@@ -72,7 +88,7 @@ const HeaderNav: React.FC<HeaderNavProps> = ({ children }) => {
       }}
     >
       <div className="logo" style={{ width: 160, height: 60, marginRight: 'auto' }}>
-        <img src="/src/assets/InnovatechLogo.png" alt="Logo" style={{ width: '100%', height: '100%', objectFit: 'contain' }} />
+        <img src="/src/assets/companyLogo.png" alt="Logo" style={{ width: '100%', height: '100%', objectFit: 'contain' }} />
       </div>
       <div style={{ flex: 1, display: 'flex', justifyContent: 'center' }}>
         <Search placeholder="input search text" allowClear onSearch={onSearch} style={{ width: 400, marginRight: 24 }} />
@@ -82,7 +98,7 @@ const HeaderNav: React.FC<HeaderNavProps> = ({ children }) => {
         <BellOutlined style={{ marginRight: 10, fontSize: 20 }} />
       </Tooltip>
       <img
-        src='/src/assets/ProfilePhoto.jpg'
+        src={employeeData[0].photo}
         alt="Profile"
         style={{
           width: 30,

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Breadcrumb, Layout } from 'antd';
 import { DesktopOutlined } from '@ant-design/icons';
 import { Link } from 'react-router-dom';
@@ -210,98 +210,101 @@ function createEmployeeImage(src: string): HTMLImageElement {
     return image;
 }
   
+
+const EmployeeList: React.FC = () => {
+
   const data: DataType[] = [
     {
-        key: "1",
+      key: "1",
+      photo: "/src/assets/Employee5.jpg",
+      employeeId: 100,
+      name: "Victoria Santiago",
+      emailId: "victoria.santiago@articulate.com",
+      department: "Management",
+      title: "Managing Director",
+      dateOfJoining: "2021-08-20",
+      phone: "123-456-7895",
+      reportingTo: "-",
+      role: "Admin",
+      age: 36,
+      address: "1212 Sales Street, Salestown",
+      birthDate: "1985-09-15"
+    },
+    {
+      key: "2",
+      photo: "/src/assets/Employee3.jpg",
+      employeeId: 101,
+      name: "Marcus Rodriguez",
+      emailId: "marcus.rodriguez@articulate.com",
+      department: "Technology Services",
+      title: "Director",
+      dateOfJoining: "2023-01-05",
+      phone: "123-456-7894",
+      reportingTo: "Victoria Santiago",
+      role: "Team Member",
+      age: 38,
+      address: "1011 Innovation Street, Innovatetown",
+      birthDate: "1984-06-28"
+    },
+    {
+      key: "3",
+      photo: "/src/assets/Employee4.jpg",
+      employeeId: 102,
+      name: "Olivia Kim",
+      emailId: "olivia.kim@articulate.com",
+      department: "Technology Services (Centre of Excellence)",
+      title: "Technical Lead",
+      dateOfJoining: "2020-03-25",
+      phone: "123-456-7893",
+      reportingTo: "Marcus Rodriguez",
+      role: "Team Member",
+      age: 40,
+      address: "789 Finance Street, Financetown",
+      birthDate: "1982-11-12"
+    },
+    {
+        key: "4",
         photo: "/src/assets/Employee1.jpg",
-        employeeId: 1001,
-        name: "Alexandra Turner",
-        emailId: "alexandra.turner@example.com",
-        department: "Marketing",
-        title: "Senior Marketing Strategist",
+        employeeId: 103,
+        name: "Naman Pokharna",
+        emailId: "naman.pokharna@articulate.com",
+        department: "Technology Services (Centre of Excellence)",
+        title: "Software Engineer Intern",
         dateOfJoining: "2022-06-15",
         phone: "123-456-7891",
-        reportingTo: "Marketing Director",
-        role: "Marketing Lead",
-        age: 32,
+        reportingTo: "Olivia Kim",
+        role: "Team Member",
+        age: 22,
         address: "123 Marketing Avenue, Cityville",
         birthDate: "1989-04-20"
     },
     {
-        key: "2",
+        key: "5",
         photo: "/src/assets/Employee2.jpg",
-        employeeId: 1002,
-        name: "Sebastian Blackwood",
-        emailId: "sebastian.blackwood@example.com",
-        department: "Engineering",
-        title: "Principal Software Engineer",
+        employeeId: 104,
+        name: "Anshul Singh",
+        emailId: "anshul.singh@articulate.com",
+        department: "Technology Services (Centre of Excellence)",
+        title: "Software Engineer Intern",
         dateOfJoining: "2021-10-10",
         phone: "123-456-7892",
-        reportingTo: "Engineering Manager",
-        role: "Lead Developer",
+        reportingTo: "Olivia Kim",
+        role: "Team Member",
         age: 35,
         address: "456 Tech Boulevard, Techcity",
         birthDate: "1986-08-05"
     },
     {
-        key: "3",
-        photo: "/src/assets/Employee3.jpg",
-        employeeId: 1003,
-        name: "Isabella Knight",
-        emailId: "isabella.knight@example.com",
-        department: "Finance",
-        title: "Chief Financial Officer",
-        dateOfJoining: "2020-03-25",
-        phone: "123-456-7893",
-        reportingTo: "CEO",
-        role: "Financial Strategist",
-        age: 40,
-        address: "789 Finance Street, Financetown",
-        birthDate: "1982-11-12"
-    },
-    {
-        key: "4",
-        photo: "/src/assets/Employee4.jpg",
-        employeeId: 1004,
-        name: "Maximilian Adler",
-        emailId: "maximilian.adler@example.com",
-        department: "Research and Development",
-        title: "Lead Research Scientist",
-        dateOfJoining: "2023-01-05",
-        phone: "123-456-7894",
-        reportingTo: "Research Director",
-        role: "Senior Scientist",
-        age: 38,
-        address: "1011 Innovation Street, Innovatetown",
-        birthDate: "1984-06-28"
-    },
-    {
-        key: "5",
-        photo: "/src/assets/Employee5.jpg",
-        employeeId: 1005,
-        name: "Victoria Santiago",
-        emailId: "victoria.santiago@example.com",
-        department: "Sales",
-        title: "Sales Director",
-        dateOfJoining: "2021-08-20",
-        phone: "123-456-7895",
-        reportingTo: "CEO",
-        role: "Sales Strategist",
-        age: 36,
-        address: "1212 Sales Street, Salestown",
-        birthDate: "1985-09-15"
-    },
-    {
       key: "6",
       photo: "/src/assets/ProfilePhoto.jpg",
-      employeeId: 1006,
+      employeeId: 105,
       name: "Priyanshi Hemrajani",
-      emailId: "priyanshi.hemrajani@example.com",
-      department: "Technology Services",
+      emailId: "priyanshi.hemrajani@articulate.com",
+      department: "Technology Services (Centre of Excellence)",
       title: "Software Engineer Intern",
       dateOfJoining: "2022-05-9",
       phone: "123-476-8851",
-      reportingTo: "Technical Lead",
+      reportingTo: "Olivia Kim",
       role: "Team Member",
       age: 25,
       address: "252 Sanjay Colony",
@@ -310,10 +313,15 @@ function createEmployeeImage(src: string): HTMLImageElement {
     
   ];
 
+  
+  useEffect(() => {
+    localStorage.setItem('data', JSON.stringify(data));
+}, [data]);
 
-const EmployeeList: React.FC = () => {
+//get data from local storage
+const localStorageData = localStorage.getItem('data');
+const dataSource = localStorageData ? JSON.parse(localStorageData) : [];
 
-    
   return (
     <Layout style={{ minHeight: '100vh' }}>
       <HeaderNav>
@@ -343,7 +351,7 @@ const EmployeeList: React.FC = () => {
                 <div className="border-t border-b ">
                 <Table
                     columns={columns} 
-                    dataSource={data}
+                    dataSource={dataSource}
                     scroll={{ x: 1300, y: 1300 }}
                     pagination={false} // Disable pagination for simplicity
                     bordered={false} // Disable default table border
