@@ -9,6 +9,9 @@ import EmployeeList from './components/EmployeeDirectory/EmployeeList';
 import Services from './components/Home/Services';
 import { AuthState } from './redux/Actions/loginTypes';
 import EmployeeProfile from './components/EmployeeProfiles/EmployeeProfile';
+import LeaveManagement from './components/LeaveManagement/LeaveRequestList';
+import Calendar from './components/LeaveManagement/LeaveRequestItem';
+
 
 
 
@@ -36,6 +39,8 @@ const App: React.FC = () => {
             <Route path="/services" element={<Services />} />
             <Route path="/employee-directory" element={<EmployeeList />} />
             <Route path="/employee-profile" element={<EmployeeProfile />} />
+            <Route path="/leave-management" element={<LeaveManagement />} />
+            <Route path="/leave-management/calendar" element={<Calendar />} />
             <Route path="/filterPanel" element={<FilterPanel />} />
             <Route path="*" element={<body className="bg-gray-100 flex items-center justify-center h-screen">
               <div className="bg-white p-8 rounded-lg shadow-md w-11/12 md:w-2/3 lg:w-1/2 xl:w-1/3">

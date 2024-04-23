@@ -72,7 +72,7 @@ const SideBar: React.FC<SideBarProps> = ({ children }) => {
       <Sider collapsible collapsed={collapsed} 
       onCollapse={(value) => setCollapsed(value)}
       breakpoint="sm"
-      className={`${collapsed ? 'collapsed' : ''} sm:w-fit w-[100%] h-full  flex`}
+      className={`${collapsed ? 'collapsed' : ''} sm:w-fit w-[100%] h-full`}
       style={{ overflowY: 'auto', height: '100vh' }}>
         <div className="demo-logo-vertical" />
         <Menu theme="dark" defaultSelectedKeys={['1']} mode="inline">
